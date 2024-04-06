@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 
 const Header = () => {
   return (
-    <nav className="border-b-[1px] flex justify-between">
+    <nav className="border-b-[1px] flex justify-between items-center">
       <div className="md:p-2 p-1 mt-2 flex justify-between">
         <Link to="/">
           <img src="/logo.png" alt="logo" className="h-10 w-10 inline-block" />
@@ -15,11 +15,11 @@ const Header = () => {
           </span>
         </Link>
         <Input
-          className="h-8 w-52 decoration-clone m-1 ml-6 font-serif"
+          className="h-8 w-48 lg:w-56 decoration-clone m-1 ml-6 font-serif"
           placeholder="Search blog..."
         />
       </div>
-      <div className="p-2 flex justify-between">
+      <div className="p-1 flex justify-between">
         <Link to="/add-blog">
           <span className="m-3 font-serif flex">
             <CgAddR className="m-1" />
