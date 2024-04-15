@@ -8,6 +8,9 @@ const Signin = () => {
     e.preventDefault();
     console.log(email, password);
   };
+
+  console.log(email, password);
+
   return (
     <form className="min-h-screen flex justify-center items-center overflow-hidden">
       <div className="bg-muted w-full md:w-[60%] rounded-md p-8">
