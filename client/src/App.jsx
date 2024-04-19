@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Newblog from "./pages/Newblog";
 import Notification from "./pages/Notification";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/add-blog" element={<Newblog />} />
           <Route path="/notification" element={<Notification />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
