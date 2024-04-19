@@ -4,15 +4,20 @@ import { useState } from "react";
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    setLoading(true);
   };
 
   console.log(email, password);
 
   return (
-    <form className="min-h-screen flex justify-center items-center overflow-hidden">
+    <form
+      className="min-h-screen flex justify-center items-center overflow-hidden"
+      onSubmit={handleSubmit}
+    >
       <div className="bg-muted w-full md:w-[60%] rounded-md p-8">
         <h1 className="text-center text-2xl font-serif mb-4">echo.blog</h1>
         <p className="text-center text-sm font-serif mb-4">
@@ -48,11 +53,10 @@ const Signin = () => {
           </span>
         </div>
         <button
-          onSubmit={handleSubmit}
           type="submit"
           className="w-full bg-primary text-white rounded-md p-2 mt-4"
         >
-          Sign in
+          {loading ? "Loading..." : "Sign in"}
         </button>
         <div className="mt-5 text-center">
           <span className="text-sm font-serif">
