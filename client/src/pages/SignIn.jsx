@@ -1,14 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (!email || !password) {
+      return setErrorMessage("Please fill out all fields");
+    }
+    try {
+      setLoading(true);
+      setErrorMessage(null);
+
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if (res.ok) {
+        navigate("/");
+      }
+    } catch (error) {
+      setErrorMessage("Something went wrong. Please try again later.");
+      setLoading(false);
+    }
   };
 
   console.log(email, password);
@@ -58,6 +83,11 @@ const Signin = () => {
         >
           {loading ? "Loading..." : "Sign in"}
         </button>
+        {errorMessage && (
+          <div className="text-red-500 font-serif text-sm mt-4 bg-red-200 rounded-sm p-2">
+            {errorMessage}
+          </div>
+        )}
         <div className="mt-5 text-center">
           <span className="text-sm font-serif">
             Don&apos;t have an account?{" "}
